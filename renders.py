@@ -5,6 +5,15 @@ import numpy as np
 from sklearn.decomposition import pca
 import seaborn as sns
 
+def correlations_plot(data):
+	corr = data.corr()
+	corr.drop(['Fresh'], axis=0, inplace=True)
+	corr.drop(['Delicatessen'], axis=1, inplace=True)
+	mask = np.zeros_like(corr)
+	mask[np.triu_indices_from(mask, 1)] = True
+	with sns.axes_style("white"):
+		sns.heatmap(corr, mask=mask, annot=True, cmap='RdBu', fmt='+.2f', cbar=False)
+
 def percentile_heatmap(indices, data):
 	# look at percentile ranks
 	pcts = 100. * data.rank(axis=0, pct=True).iloc[indices].round(decimals=3)
