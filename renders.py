@@ -14,6 +14,8 @@ def correlations_plot(data):
 	with sns.axes_style("white"):
 		sns.heatmap(corr, mask=mask, annot=True, cmap='RdBu', fmt='+.2f', cbar=False)
 
+	return corr
+
 def percentile_heatmap(indices, data):
 	# look at percentile ranks
 	pcts = 100. * data.rank(axis=0, pct=True).iloc[indices].round(decimals=3)
